@@ -16,7 +16,7 @@ go to https://www.python.org/downloads/
 
 ## Set up Cron job 
 
-here the crontab example that run code for every 10 seconds.
+here the crontab example that run code for every 10 minutes.
 
 `*/10 * * * * cd /home/user/service-watchdog-py/ && /usr/bin/python3.5  /home/user/service-watchdog-py/app.py`
 
