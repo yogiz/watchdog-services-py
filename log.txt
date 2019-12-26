@@ -1,0 +1,7 @@
+26/12/19 - 12:16  :
+  mysql - active
+  apache2 - inactive
+ ---  succes running 
+26/12/19 - 12:16  :
+  mysql - active
+  apache2 - active
