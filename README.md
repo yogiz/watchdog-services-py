@@ -24,6 +24,14 @@ you can change according to your file directory
 
 `*/10 * * * * cd {{ base code directory }} && {{ your python 3 dir}}  {{ file code directory uri }}`
 
+### Cron to delete file one time every month
+
+`0 0 1 * * rm /home/user/WatchDog-Services-Py/log.txt`
+
+Change based on your log uri.
+
+`0 0 1 * * rm {{ log file uri }} `
+
 # Future Imporvement
 
 I want to add features to check if the website is okay thru http request. Then if after restart all service for webserver, the website still down, it will email us and reboot the system.

@@ -8,14 +8,8 @@ def check_service(service) :
         output = output.decode('utf-8')
         return output
 
-now = datetime.now()
-curTime = now.strftime("%d/%m/%y - %H:%M")
-
 services = ["mysql", "apache2"] # change, add service you want watch
 needReboot = False
-
-with open('log.txt', 'a') as f:
-        f.writelines(curTime + "  :\n")
 
 for service in services :
 
@@ -29,11 +23,14 @@ for service in services :
                 except :
                         status = ' ---  fail running fixer \n'
                         needReboot = True
+
                 if (check_service(service) == 'inactive\n') :
                         needReboot = True
 
-        with open('log.txt', 'a') as f:
-                f.writelines( '  ' + service +' - ' + output + status)        
+                now = datetime.now()
+                curTime = now.strftime("%d/%m/%y - %H:%M")
+                with open('log.txt', 'a') as f:
+                        f.writelines( curTime + ' : ' + service +' - ' + output + status)        
 
 if(needReboot):
         os.system("sudo reboot")
