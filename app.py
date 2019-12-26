@@ -2,6 +2,11 @@ import subprocess
 from datetime import datetime
 import os
 
+def check_service(service) :
+        p =  subprocess.Popen(["systemctl", "is-active",  service], stdout=subprocess.PIPE)
+        (output, err) = p.communicate()
+        output = output.decode('utf-8')
+        return output
 
 now = datetime.now()
 curTime = now.strftime("%d/%m/%y - %H:%M")
@@ -15,9 +20,7 @@ with open('log.txt', 'a') as f:
 for service in services :
 
         status = ''
-        p =  subprocess.Popen(["systemctl", "is-active",  service], stdout=subprocess.PIPE)
-        (output, err) = p.communicate()
-        output = output.decode('utf-8')
+        output = check_service(service)
 
         if(output == 'inactive\n'):
                 try :
@@ -26,9 +29,11 @@ for service in services :
                 except :
                         status = ' ---  fail running fixer \n'
                         needReboot = True
+                if (check_service(service) == 'inactive\n') :
+                        needReboot = True
 
         with open('log.txt', 'a') as f:
-                f.writelines( '  ' + service +' - ' + output + status)
+                f.writelines( '  ' + service +' - ' + output + status)        
 
 if(needReboot):
         os.system("sudo reboot")
