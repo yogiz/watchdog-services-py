@@ -11,12 +11,11 @@ def send_mail(message, subject, mail_setting) :
     receiver = mail_setting[6]
 
     # type your message: use two newlines (\n) to separate the subject from the message body, and use 'f' to  automatically insert variables in the text
-    message = f"""\
-Subject: {subject}
-To: {receiver}
-From: {sender}
+    message = """Subject: %s
+To: %s
+From: %s
 
-{message}"""
+%s""" % (subject,receiver,sender,message)
 
     try:
         #send your message with credentials specified above
