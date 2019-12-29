@@ -35,3 +35,7 @@ Change based on your log uri.
 # Future Imporvement
 
 I want to add features to check if the website is okay thru http request. Then if after restart all service for webserver, the website still down, it will email us and reboot the system.
+
+# credit
+
+- Mailer code i get from `https://blog.mailtrap.io/sending-emails-in-python-tutorial-with-code-examples/`

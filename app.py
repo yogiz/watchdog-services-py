@@ -1,36 +1,19 @@
-import subprocess
-from datetime import datetime
-import os
+from services import run_checker
+from mailer import mail_tester
 
-def check_service(service) :
-        p =  subprocess.Popen(["systemctl", "is-active",  service], stdout=subprocess.PIPE)
-        (output, err) = p.communicate()
-        output = output.decode('utf-8')
-        return output
-
+### SET UP SERVICES ###
 services = ["mysql", "apache2"] # change, add service you want watch
-needReboot = False
 
-for service in services :
+### SET UP EMAIL - here is the example setting ###
+isEmail = False  # set True    if you want turn on email notif feature
+# ------------ [ssl (True/False), port, smtp_server, login, password, sender, receiver]
+mail_setting = [True, 465, "smtp.example.com","from@example.com", "1a2b3c4d5e6f7g", "from@example.com", "receiver@example.com"] 
 
-        status = ''
-        output = check_service(service)
 
-        if(output == 'inactive\n'):
-                try :
-                        os.system('sudo /etc/init.d/'+ service +' start')
-                        status = ' ---  succes running \n'
-                except :
-                        status = ' ---  fail running fixer \n'
-                        needReboot = True
+### RUN SERVICES 
 
-                if (check_service(service) == 'inactive\n') :
-                        needReboot = True
+# test Email
+# mail_tester(mail_setting) 
 
-                now = datetime.now()
-                curTime = now.strftime("%d/%m/%y - %H:%M")
-                with open('log.txt', 'a') as f:
-                        f.writelines( curTime + ' : ' + service +' - ' + output + status)        
-
-if(needReboot):
-        os.system("sudo reboot")
+# Run
+run_checker(services, isEmail, mail_setting)
