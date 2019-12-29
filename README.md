@@ -2,9 +2,11 @@
 
 Firstly, my website that I host in VPS very often going down. Sometime becouse `mysql` service is not active. Still dont know why.
 
-Then I think, I just need to create code for checking service that needed for webserver if some of them is going down. Then the code will restart the service for me.
+Then I think, I just need to create code for checking service that needed for webserver if some of them is going down. Then the code will restart the service for me. And sent email notification if any service down.
 
 In this case I only monitor apache2 and mysql service. (you can add as many as you want)
+
+![alt text](https://i.imgur.com/GzRBXu5.jpg)
 
 # Perequisite
 
